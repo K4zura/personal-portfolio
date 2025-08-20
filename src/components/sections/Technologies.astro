@@ -1,0 +1,74 @@
+---
+import Button from "@/components/ui/Button.astro";
+import SectionTitle from "@/components/ui/SectionTitle.astro";
+import TechnologiesCards from "@/components/ui/TechnologiesCards.svelte";
+import technologiesData from "@/data/technologies.json";
+import { loadContent } from "@/utils/i18n";
+import type { Technology } from "@/utils/types";
+
+interface Props {
+  lang?: "en" | "es";
+}
+
+const { lang = "en" } = Astro.props;
+const content = await loadContent();
+const technologyL = content.technologies || {};
+type Category = "frontend" | "backend" | "database" | "tools";
+
+// Group technologies by category
+const technologies = technologiesData as Technology[];
+const groupedTechnologies = Object.groupBy(
+  technologies,
+  (tech) => tech.category as Category
+) as Partial<Record<Category, Technology[]>>;
+
+Object.entries(groupedTechnologies).forEach(([category, techs]) => {
+  techs?.sort((a, b) => (b.level || 0) - (a.level || 0));
+});
+
+const categories = ["frontend", "backend", "database", "tools"] as const;
+---
+
+<section
+  id="technologies"
+  class="flex flex-col items-center p-8 min-h-lvh w-full"
+>
+  <SectionTitle>
+    {technologyL.title?.[lang]}
+  </SectionTitle>
+
+  <div class="flex gap-4 mt-12 flex-wrap">
+    <Button variant="outline" data="all" class="filter-btn active">
+      {technologyL.categories.all?.[lang]}
+    </Button>
+    {
+      categories.map((category) => (
+        <Button variant="outline" class="filter-btn" data={category}>
+          {technologyL.categories[category]?.[lang]}
+        </Button>
+      ))
+    }
+  </div>
+  <TechnologiesCards client:load technologies={technologiesData} filter="all" />
+</section>
+
+<script is:inline>
+  const buttons = document.querySelectorAll(".filter-btn");
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const category = btn.dataset.category;
+
+      // Emitimos un evento global
+      window.dispatchEvent(
+        new CustomEvent("filter-change", {
+          detail: category,
+        })
+      );
+
+      // Opcional: marcar botón activo
+      buttons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+    });
+  });
+</script>

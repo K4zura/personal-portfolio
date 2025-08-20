@@ -1,0 +1,135 @@
+---
+import { loadContent } from "@/utils/i18n";
+import { ArrowBigRightDash, Mail } from "@lucide/astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  lang?: "en" | "es";
+}
+
+const { lang = "en" } = Astro.props;
+const content = await loadContent();
+const hero = content.hero || {};
+---
+
+<section
+  id="home"
+  class="relative flex flex-col lg:flex-row items-center justify-center lg:justify-between py-24 px-4 lg:p-8 min-h-lvh w-full max-w-6xl gap-4 lg:gap-16"
+  aria-label="Hero section - Introduction and welcome"
+  role="banner"
+>
+  <picture
+    class="lg:order-2 aspect-square w-52 h-auto xs:w-80 md:w-96 lg:w-[420px] rounded-full overflow-hidden shadow-2xl shadow-primary/20 ring-4 ring-surface relative"
+  >
+    <Image
+      src="/images/profile_photo.png"
+      alt="Johann Bonilla Bolivar - Software Developer"
+      class="image-mix w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500 peer"
+      width={100}
+      height={100}
+      inferSize
+      loading="eager"
+    />
+    <!-- <div
+    class="image-mix2 peer-hover:scale-110 transition-transform duration-500"
+  >
+  </div> -->
+  </picture>
+
+  <div class="flex flex-col max-md:items-center gap-2 lg:order-1">
+    <h1 class="text-4xl sm:text-6xl font-bold text-text-primary text-center">
+      {hero.greeting?.[lang]}
+      <span
+        class="text-5xl sm:text-7xl text-transparent bg-gradient-to-r from-primary-hover to-text-muted bg-clip-text"
+        >Johann</span
+      >
+    </h1>
+    <h2 class="text-2xl sm:text-4xl font-semibold text-text-secondary">
+      {hero.title?.[lang]}
+    </h2>
+    <p class="text-sm sm:text-lg text-text-secondary mt-2 text-center">
+      {hero.subtitle?.[lang]}
+    </p>
+    <div class="flex gap-4 mt-4">
+      <a
+        href="#projects"
+        class="group flex gap-1.5 items-center px-3 py-2 bg-primary text-white text-sm rounded-lg font-semibold transition-all hover:-translate-y-1 hover:bg-primary-hover"
+      >
+        <span>{hero.cta.viewWork?.[lang]}</span>
+        <ArrowBigRightDash
+          class="size-5 transition-transform group-hover:translate-x-1"
+        />
+      </a>
+      <a
+        href="#contact"
+        class="group flex gap-2 items-center px-3 py-2 border-2 border-border text-text-primary text-sm rounded-lg font-semibold transition-all hover:-translate-y-1 hover:border-primary hover:bg-surface"
+      >
+        <span>{hero.cta.contact?.[lang]}</span>
+        <Mail class="size-5 transition-transform group-hover:scale-105" />
+      </a>
+    </div>
+  </div>
+
+  <a
+    href="#experience"
+    class="absolute bottom-0 lg:bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-text-secondary"
+  >
+    <p class="text-sm mb-2 font-medium">{hero.scrollIndicator?.[lang]}</p>
+    <div class="scroll-indicator">
+      <svg
+        class="w-6 h-10 animate-bounce"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </a>
+</section>
+
+<style>
+  .image-mix {
+    filter: contrast(1) brightness(1.2) saturate(1.1) sepia(0.1);
+  }
+
+  /* .image-mix2 {
+    background-image: url(/images/profile_photo.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(20px);
+    transform: scale(1.05);
+    z-index: -1;
+  } */
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const scrollLinks = document.querySelectorAll('a[href^="#"]');
+
+    scrollLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute("href")?.substring(1);
+        const targetElement = document.getElementById(targetId || "");
+
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      });
+    });
+  });
+</script>

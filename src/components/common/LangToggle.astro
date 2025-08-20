@@ -1,0 +1,190 @@
+---
+import { LANGUAGE_CONFIG } from "@/utils/i18n";
+import type { SupportedLanguage } from "@/utils/types";
+
+const currentLang = (Astro.currentLocale as SupportedLanguage) || "en";
+const otherLang: SupportedLanguage = currentLang === "en" ? "es" : "en";
+
+const currentPath = Astro.url.pathname;
+const cleanPath = currentPath.replace(/^\//, "").replace(/^(en|es)\//, "");
+
+let otherLangUrl: string;
+if (cleanPath === "en") {
+  otherLangUrl = `/${otherLang}`.replace(/\/$/, "") || "/";
+} else {
+  otherLangUrl = `/${otherLang}`.replace(/\/$/, "") || `/${otherLang}`;
+}
+
+const currentLangConfig = LANGUAGE_CONFIG[currentLang];
+const otherLangConfig = LANGUAGE_CONFIG[otherLang];
+---
+
+<div class="language-toggle">
+  <button
+    id="language-toggle-btn"
+    class="flex items-center gap-2 px-3 py-1 rounded-lg bg-secondary hover:text-primary transition-colors duration-200 z-50 text-text-secondary"
+    aria-label={`Switch to ${otherLangConfig.name}`}
+    data-current-lang={currentLang}
+    data-other-lang={otherLang}
+    data-other-url={otherLangUrl}
+  >
+    <span class="text-lg" aria-hidden="true">{currentLangConfig.flag}</span>
+    <span class="text-sm font-medium">{currentLangConfig.name}</span>
+    <svg
+      class="w-4 h-4 transition-transform duration-200"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M19 9l-7 7-7-7"></path>
+    </svg>
+  </button>
+
+  <!-- Dropdown menu -->
+  <div
+    id="language-dropdown"
+    class="absolute top-full right-0 bg-secondary rounded-b-lg w-full shadow-lg invisible h-0 transition-all duration-200 z-30 overflow-hidden"
+    role="menu"
+    aria-labelledby="language-toggle-btn"
+  >
+    <a
+      href={otherLangUrl}
+      class="flex items-center gap-2 px-3 py-1 text-sm text-text-secondary hover:text-primary transition-colors duration-150"
+      role="menuitem"
+      aria-label="Lang item"
+      data-lang={otherLang}
+    >
+      <span class="text-lg" aria-hidden="true">{otherLangConfig.flag}</span>
+      <span>{otherLangConfig.name}</span>
+    </a>
+  </div>
+</div>
+
+<script>
+  class LanguageToggle {
+    private button: HTMLButtonElement;
+    private dropdown: HTMLElement;
+    private isOpen: boolean = false;
+
+    constructor() {
+      this.button = document.getElementById(
+        "language-toggle-btn"
+      ) as HTMLButtonElement;
+      this.dropdown = document.getElementById(
+        "language-dropdown"
+      ) as HTMLElement;
+
+      if (this.button && this.dropdown) {
+        this.init();
+      }
+    }
+
+    private init() {
+      // Toggle dropdown on button click
+      this.button.addEventListener("click", (e) => {
+        e.stopPropagation();
+        this.toggleDropdown();
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener("click", (e) => {
+        if (
+          !this.button.contains(e.target as Node) &&
+          !this.dropdown.contains(e.target as Node)
+        ) {
+          this.closeDropdown();
+        }
+      });
+
+      // Handle keyboard navigation
+      this.button.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          this.toggleDropdown();
+        } else if (e.key === "Escape") {
+          this.closeDropdown();
+        }
+      });
+
+      // Handle language selection
+      const languageLinks = this.dropdown.querySelectorAll("a[data-lang]");
+      languageLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          const lang = (e.currentTarget as HTMLElement).dataset.lang;
+          if (lang) {
+            this.handleLanguageChange(lang as "en" | "es");
+          }
+        });
+      });
+    }
+
+    private toggleDropdown() {
+      if (this.isOpen) {
+        this.closeDropdown();
+      } else {
+        this.openDropdown();
+      }
+    }
+
+    private openDropdown() {
+      this.isOpen = true;
+      this.dropdown.classList.remove("h-0", "invisible");
+      this.dropdown.classList.add("h-full", "visible");
+      this.button.setAttribute("aria-expanded", "true");
+      this.button.classList.add("rounded-b-none");
+
+      // Rotate arrow
+      const arrow = this.button.querySelector("svg");
+      if (arrow) {
+        arrow.style.transform = "rotate(180deg)";
+      }
+    }
+
+    private closeDropdown() {
+      this.isOpen = false;
+      this.dropdown.classList.remove("h-full", "visible");
+      this.dropdown.classList.add("h-0", "invisible");
+      this.button.setAttribute("aria-expanded", "false");
+      this.button.classList.remove("rounded-b-none");
+
+      // Reset arrow
+      const arrow = this.button.querySelector("svg");
+      if (arrow) {
+        arrow.style.transform = "rotate(0deg)";
+      }
+    }
+
+    private handleLanguageChange(lang: "en" | "es") {
+      // Store language preference
+      localStorage.setItem("preferred-language", lang);
+
+      // Dispatch custom event
+      window.dispatchEvent(
+        new CustomEvent("languageChange", {
+          detail: { language: lang },
+        })
+      );
+
+      // The navigation will be handled by the link's href
+      this.closeDropdown();
+    }
+  }
+
+  // Initialize when DOM is loaded
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => new LanguageToggle());
+  } else {
+    new LanguageToggle();
+  }
+</script>
+
+<style>
+  .language-toggle {
+    position: relative;
+  }
+</style>

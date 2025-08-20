@@ -1,0 +1,136 @@
+---
+import { Moon, Sun } from "@lucide/astro";
+---
+
+<button
+  id="theme-toggle"
+  class="theme-toggle relative rounded-lg cursor-pointer p-2 size-9 text-text-secondary bg-secondary hover:text-primary transition-all flex items-center justify-center overflow-hidden"
+  aria-label="Toggle theme"
+>
+  <Sun id="light-icon" class="light-icon" />
+  <Moon id="dark-icon" class="dark-icon" />
+</button>
+
+<style>
+  .theme-toggle:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .light-icon,
+  .dark-icon {
+    position: absolute;
+    transition: all var(--transition-normal);
+  }
+
+  :root .light-icon {
+    transform: rotate(0deg) scale(0.8);
+  }
+
+  :root .dark-icon {
+    transform: rotate(0deg) scale(0.8);
+  }
+
+  .theme-toggle.changing {
+    transform: scale(0.95);
+  }
+
+  .theme-toggle.changing .light-icon,
+  .theme-toggle.changing .dark-icon {
+    transform: rotate(360deg) scale(1.1);
+  }
+</style>
+
+<script>
+  import { toggleTheme, getCurrentTheme } from "../../utils/theme";
+
+  class ThemeToggle {
+    private button: HTMLButtonElement;
+    private isChanging = false;
+
+    constructor() {
+      this.button = document.getElementById(
+        "theme-toggle"
+      ) as HTMLButtonElement;
+      this.init();
+    }
+
+    private init(): void {
+      if (!this.button) return;
+
+      // Set initial state
+      this.updateAriaLabel();
+
+      // Add click handler
+      this.button.addEventListener("click", this.handleToggle.bind(this));
+
+      // Listen for theme changes from other sources
+      window.addEventListener(
+        "theme-changed",
+        this.handleThemeChange.bind(this) as EventListener
+      );
+
+      // Listen for system theme changes
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      mediaQuery.addEventListener(
+        "change",
+        this.handleSystemThemeChange.bind(this)
+      );
+    }
+
+    private handleToggle(): void {
+      if (this.isChanging) return;
+
+      this.isChanging = true;
+      this.button.classList.add("changing");
+
+      // Add a small delay for visual feedback
+      setTimeout(() => {
+        toggleTheme();
+        this.updateAriaLabel();
+
+        // Remove changing class after animation
+        setTimeout(() => {
+          this.button.classList.remove("changing");
+          this.isChanging = false;
+        }, 150);
+      }, 50);
+    }
+
+    private handleThemeChange(): void {
+      this.updateAriaLabel();
+    }
+
+    private handleSystemThemeChange(): void {
+      // Only update if user hasn't manually set a preference
+      if (!localStorage.getItem("theme")) {
+        this.updateAriaLabel();
+      }
+    }
+
+    private updateAriaLabel(): void {
+      const currentTheme = getCurrentTheme();
+      if (currentTheme === "dark") {
+        document.getElementById("dark-icon")?.classList.remove("opacity-0");
+        document.getElementById("light-icon")?.classList.add("opacity-0");
+      } else {
+        document.getElementById("light-icon")?.classList.remove("opacity-0");
+        document.getElementById("dark-icon")?.classList.add("opacity-0");
+      }
+      const nextTheme = currentTheme === "light" ? "dark" : "light";
+      this.button.setAttribute("aria-label", `Switch to ${nextTheme} theme`);
+      this.button.setAttribute("title", `Switch to ${nextTheme} theme`);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => new ThemeToggle());
+  } else {
+    new ThemeToggle();
+  }
+</script>

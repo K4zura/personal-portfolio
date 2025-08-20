@@ -1,0 +1,25 @@
+---
+import SectionTitle from "@/components/ui/SectionTitle.astro";
+import { loadContent } from "@/utils/i18n";
+
+interface Props {
+  lang?: "en" | "es";
+}
+
+const { lang = "en" } = Astro.props;
+const content = await loadContent();
+const experience = content.contact || {};
+---
+
+<section
+  id="contact"
+  class="flex flex-col items-center p-8 min-h-lvh w-full bg-surface"
+>
+  <SectionTitle>
+    {experience.title?.[lang]}
+  </SectionTitle>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {});
+</script>

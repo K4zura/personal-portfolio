@@ -1,0 +1,233 @@
+---
+import { loadContent } from "@/utils/i18n";
+import LangToggle from "./LangToggle.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+
+const currentLang = lang;
+const content = await loadContent();
+const navigation = content.navigation || {};
+const navItems = [
+  {
+    key: "home",
+    href: "#home",
+    label: navigation.home?.[currentLang] || "Home",
+  },
+  {
+    key: "experience",
+    href: "#experience",
+    label: navigation.experience?.[currentLang] || "Experience",
+  },
+  {
+    key: "technologies",
+    href: "#technologies",
+    label: navigation.technologies?.[currentLang] || "Technologies",
+  },
+  {
+    key: "projects",
+    href: "#projects",
+    label: navigation.projects?.[currentLang] || "Projects",
+  },
+  {
+    key: "about",
+    href: "#about",
+    label: navigation.about?.[currentLang] || "About",
+  },
+  {
+    key: "contact",
+    href: "#contact",
+    label: navigation.contact?.[currentLang] || "Contact",
+  },
+];
+---
+
+<header
+  id="main-header"
+  class="fixed inset-0 w-full h-16 flex items-center justify-center border-b border-border bg-background/75 backdrop-blur-md z-50 px-8 md:px-16 xl:px-28"
+>
+  <a
+    href="#home"
+    class="text-2xl font-bold basis-0 grow text-primary-hover"
+    aria-label="Go to home section"
+  >
+    Portafolio
+  </a>
+  <nav class="hidden lg:flex items-center justify-center">
+    <ul class="flex items-center gap-2">
+      {
+        navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="nav-link text-sm font-medium px-3 py-2 rounded-full text-text-secondary hover:bg-surface-hover hover:text-primary transition-colors"
+              data-section={item.key}
+              aria-label={`Navigate to ${item.label} section`}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <div class="basis-0 grow flex justify-end items-center gap-2">
+    <LangToggle lang={lang} />
+    <ThemeToggle />
+  </div>
+</header>
+
+<style>
+  .nav-link.active,
+  .mobile-nav-link.active {
+    @apply text-primary bg-surface-hover;
+  }
+</style>
+
+<script>
+  class NavigationManager {
+    private navLinks: NodeListOf<HTMLAnchorElement> | null = null;
+    private header: HTMLElement | null = null;
+    private sections: NodeListOf<HTMLElement> | null = null;
+    private intersectionObserver: IntersectionObserver | null = null;
+
+    constructor() {
+      this.init();
+    }
+
+    private init() {
+      // Get DOM elements
+      this.navLinks = document.querySelectorAll(".nav-link");
+      this.header = document.getElementById("main-header");
+      this.sections = document.querySelectorAll("section[id]");
+
+      // Set up smooth scrolling
+      this.setupSmoothScrolling();
+
+      // Set up intersection observer for active section highlighting
+      this.setupIntersectionObserver();
+
+      // Set up scroll effects for header
+      this.setupScrollEffects();
+    }
+
+    private setupSmoothScrolling() {
+      // Add smooth scrolling to all navigation links
+      const allNavLinks = [...(this.navLinks || [])];
+
+      allNavLinks.forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+
+          const href = link.getAttribute("href");
+          if (href && href.startsWith("#")) {
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+              // Calculate offset for fixed header
+              const headerHeight =
+                document.getElementById("main-header")?.offsetHeight || 64;
+              const targetPosition =
+                targetElement.offsetTop - headerHeight - 20; // 20px extra padding
+
+              window.scrollTo({
+                top: targetPosition,
+                behavior: "smooth",
+              });
+            }
+          }
+        });
+      });
+    }
+
+    private setupIntersectionObserver() {
+      // Create intersection observer for section detection
+      const observerOptions = {
+        root: null,
+        rootMargin: "-20% 0px -70% 0px", // Trigger when section is 20% from top
+        threshold: 0,
+      };
+
+      this.intersectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.id;
+            this.setActiveNavItem(sectionId);
+          }
+        });
+      }, observerOptions);
+
+      // Observe all sections
+      this.sections?.forEach((section) => {
+        this.intersectionObserver?.observe(section);
+      });
+    }
+
+    private setActiveNavItem(activeSectionId: string) {
+      // Remove active class from all nav links
+      const allNavLinks = [...(this.navLinks || [])];
+
+      allNavLinks.forEach((link) => {
+        link.classList.remove("active");
+      });
+
+      // Add active class to corresponding nav links
+      const activeLinks = allNavLinks.filter(
+        (link) => link.getAttribute("data-section") === activeSectionId
+      );
+
+      activeLinks.forEach((link) => {
+        link.classList.add("active");
+      });
+    }
+
+    private setupScrollEffects() {
+      let ticking = false;
+
+      const updateHeader = () => {
+        const scrollY = window.scrollY;
+
+        // Add scrolled class when scrolled down
+        if (scrollY > 50) {
+          this.header?.classList.add("scrolled");
+        } else {
+          this.header?.classList.remove("scrolled");
+        }
+
+        ticking = false;
+      };
+
+      const requestTick = () => {
+        if (!ticking) {
+          requestAnimationFrame(updateHeader);
+          ticking = true;
+        }
+      };
+
+      // Listen for scroll events
+      window.addEventListener("scroll", requestTick, { passive: true });
+
+      // Initial call
+      updateHeader();
+    }
+
+    // Cleanup method
+    public destroy() {
+      this.intersectionObserver?.disconnect();
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      new NavigationManager();
+    });
+  } else {
+    new NavigationManager();
+  }
+</script>

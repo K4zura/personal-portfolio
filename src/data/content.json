@@ -1,0 +1,312 @@
+{
+  "navigation": {
+    "home": {
+      "en": "Home",
+      "es": "Inicio"
+    },
+    "experience": {
+      "en": "Experience",
+      "es": "Experiencia"
+    },
+    "technologies": {
+      "en": "Technologies",
+      "es": "Tecnologías"
+    },
+    "projects": {
+      "en": "Projects",
+      "es": "Proyectos"
+    },
+    "about": {
+      "en": "About",
+      "es": "Sobre mí"
+    },
+    "contact": {
+      "en": "Contact",
+      "es": "Contacto"
+    }
+  },
+  "hero": {
+    "greeting": {
+      "en": "Hi, I'm",
+      "es": "Hola, soy"
+    },
+    "title": {
+      "en": "Full Stack Developer",
+      "es": "Desarrollador Full Stack"
+    },
+    "subtitle": {
+      "en": "I create modern web applications with passion and precision",
+      "es": "Creo aplicaciones web modernas con pasión y precisión"
+    },
+    "cta": {
+      "viewWork": {
+        "en": "View My Work",
+        "es": "Ver Mi Trabajo"
+      },
+      "contact": {
+        "en": "Get In Touch",
+        "es": "Contactar"
+      }
+    },
+    "scrollIndicator": {
+      "en": "Scroll to explore",
+      "es": "Desplázate para explorar"
+    }
+  },
+  "experience": {
+    "title": {
+      "en": "Professional Experience",
+      "es": "Experiencia Profesional"
+    },
+    "subtitle": {
+      "en": "My journey in software development",
+      "es": "Mi trayectoria en desarrollo de software"
+    },
+    "present": {
+      "en": "Present",
+      "es": "Presente"
+    },
+    "duration": {
+      "en": "Duration",
+      "es": "Duración"
+    },
+    "technologies": {
+      "en": "Technologies",
+      "es": "Tecnologías"
+    }
+  },
+  "technologies": {
+    "title": {
+      "en": "Technologies & Skills",
+      "es": "Tecnologías y Habilidades"
+    },
+    "subtitle": {
+      "en": "Tools and technologies I work with",
+      "es": "Herramientas y tecnologías con las que trabajo"
+    },
+    "categories": {
+      "all": {
+        "en": "All",
+        "es": "Todo"
+      },
+      "frontend": {
+        "en": "Frontend",
+        "es": "Frontend"
+      },
+      "backend": {
+        "en": "Backend",
+        "es": "Backend"
+      },
+      "tools": {
+        "en": "Tools",
+        "es": "Herramientas"
+      },
+      "database": {
+        "en": "Database",
+        "es": "Base de Datos"
+      }
+    },
+    "skillLevel": {
+      "en": "Skill Level",
+      "es": "Nivel de Habilidad"
+    }
+  },
+  "projects": {
+    "title": {
+      "en": "Featured Projects",
+      "es": "Proyectos Destacados"
+    },
+    "subtitle": {
+      "en": "Some of my recent work",
+      "es": "Algunos de mis trabajos recientes"
+    },
+    "viewDemo": {
+      "en": "View Demo",
+      "es": "Ver Demo"
+    },
+    "viewCode": {
+      "en": "View Code",
+      "es": "Ver Código"
+    },
+    "technologies": {
+      "en": "Built with",
+      "es": "Construido con"
+    },
+    "featured": {
+      "en": "Featured",
+      "es": "Destacado"
+    }
+  },
+  "about": {
+    "title": {
+      "en": "About Me",
+      "es": "Acerca de Mí"
+    },
+    "subtitle": {
+      "en": "Get to know me better",
+      "es": "Conóceme mejor"
+    },
+    "downloadResume": {
+      "en": "Download Resume",
+      "es": "Descargar CV"
+    },
+    "interests": {
+      "title": {
+        "en": "Interests",
+        "es": "Intereses"
+      }
+    }
+  },
+  "contact": {
+    "title": {
+      "en": "Let's Work Together",
+      "es": "Trabajemos Juntos"
+    },
+    "subtitle": {
+      "en": "Feel free to reach out for opportunities or just to say hello",
+      "es": "No dudes en contactarme para oportunidades o simplemente para saludar"
+    },
+    "email": {
+      "label": {
+        "en": "Email",
+        "es": "Correo"
+      },
+      "action": {
+        "en": "Send Email",
+        "es": "Enviar Correo"
+      }
+    },
+    "social": {
+      "github": {
+        "en": "View GitHub Profile",
+        "es": "Ver Perfil de GitHub"
+      },
+      "linkedin": {
+        "en": "Connect on LinkedIn",
+        "es": "Conectar en LinkedIn"
+      }
+    },
+    "form": {
+      "name": {
+        "label": {
+          "en": "Name",
+          "es": "Nombre"
+        },
+        "placeholder": {
+          "en": "Your name",
+          "es": "Tu nombre"
+        }
+      },
+      "email": {
+        "label": {
+          "en": "Email",
+          "es": "Correo"
+        },
+        "placeholder": {
+          "en": "your.email@example.com",
+          "es": "tu.correo@ejemplo.com"
+        }
+      },
+      "message": {
+        "label": {
+          "en": "Message",
+          "es": "Mensaje"
+        },
+        "placeholder": {
+          "en": "Tell me about your project...",
+          "es": "Cuéntame sobre tu proyecto..."
+        }
+      },
+      "submit": {
+        "en": "Send Message",
+        "es": "Enviar Mensaje"
+      },
+      "sending": {
+        "en": "Sending...",
+        "es": "Enviando..."
+      },
+      "success": {
+        "en": "Message sent successfully!",
+        "es": "¡Mensaje enviado exitosamente!"
+      },
+      "error": {
+        "en": "Failed to send message. Please try again.",
+        "es": "Error al enviar mensaje. Por favor intenta de nuevo."
+      }
+    }
+  },
+  "theme": {
+    "toggle": {
+      "light": {
+        "en": "Switch to light mode",
+        "es": "Cambiar a modo claro"
+      },
+      "dark": {
+        "en": "Switch to dark mode",
+        "es": "Cambiar a modo oscuro"
+      }
+    }
+  },
+  "language": {
+    "toggle": {
+      "en": "Switch language",
+      "es": "Cambiar idioma"
+    },
+    "current": {
+      "en": "English",
+      "es": "Español"
+    }
+  },
+  "common": {
+    "loading": {
+      "en": "Loading...",
+      "es": "Cargando..."
+    },
+    "error": {
+      "en": "Something went wrong",
+      "es": "Algo salió mal"
+    },
+    "retry": {
+      "en": "Try again",
+      "es": "Intentar de nuevo"
+    },
+    "close": {
+      "en": "Close",
+      "es": "Cerrar"
+    },
+    "open": {
+      "en": "Open",
+      "es": "Abrir"
+    },
+    "menu": {
+      "en": "Menu",
+      "es": "Menú"
+    },
+    "back": {
+      "en": "Back",
+      "es": "Volver"
+    },
+    "next": {
+      "en": "Next",
+      "es": "Siguiente"
+    },
+    "previous": {
+      "en": "Previous",
+      "es": "Anterior"
+    }
+  },
+  "accessibility": {
+    "skipToContent": {
+      "en": "Skip to main content",
+      "es": "Saltar al contenido principal"
+    },
+    "openMenu": {
+      "en": "Open navigation menu",
+      "es": "Abrir menú de navegación"
+    },
+    "closeMenu": {
+      "en": "Close navigation menu",
+      "es": "Cerrar menú de navegación"
+    }
+  }
+}

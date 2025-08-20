@@ -1,0 +1,52 @@
+---
+import SectionTitle from "@/components/ui/SectionTitle.astro";
+import experienceData from "@/data/experience.json";
+import { loadContent } from "@/utils/i18n";
+import type { ExperienceItem } from "@/utils/types";
+
+interface Props {
+  lang?: "en" | "es";
+}
+
+const { lang = "en" } = Astro.props;
+const content = await loadContent();
+const t = content.experience || {};
+
+const experiences = experienceData as ExperienceItem[];
+---
+
+<section
+  id="experience"
+  class="flex flex-col items-center p-8 min-h-lvh w-full bg-surface gap-16"
+>
+  <SectionTitle>
+    {t.title?.[lang]}
+  </SectionTitle>
+
+  <ol
+    class="flex flex-col gap-14 border-l-2 border-border py-4 w-full max-w-[1080px]"
+  >
+    {
+      experiences.map((experience) => (
+        <li class="relative grid md:grid-cols-5 gap-6 w-full px-8">
+          <span class="absolute -left-2.5 size-4 bg-primary top-5 rounded-full" />
+          <div class="flex flex-col md:col-span-2">
+            <h3 class="text-primary font-bold text-2xl">
+              {experience.position?.[lang]}
+            </h3>
+            <p class="text-xl text-text-primary font-semibold">
+              {experience.company}
+            </p>
+            <time class="flex gap-3 text-sm text-text-secondary mt-2">
+              <p>{experience.duration.start?.[lang]}</p> -
+              <p>{experience.duration.end?.[lang]}</p>
+            </time>
+          </div>
+          <p class="text-pretty md:col-span-3 text-text-secondary">
+            {experience.description?.[lang]}
+          </p>
+        </li>
+      ))
+    }
+  </ol>
+</section>

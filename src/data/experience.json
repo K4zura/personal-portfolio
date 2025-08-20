@@ -1,0 +1,48 @@
+[
+  {
+    "id": "support-cariai",
+    "company": "Cari AI",
+    "position": {
+      "en": "Support Assistant",
+      "es": "Auxiliar de Soporte"
+    },
+    "duration": {
+      "start": {
+        "en": "August 2025",
+        "es": "Agosto 2025"
+      },
+      "end": {
+        "en": "Currently",
+        "es": "Actualmente"
+      }
+    },
+    "description": {
+      "en": "I'm currently completing a two-month trial period at Cari AI, where I am training to create conversational bots and agents. My responsibilities include managing conversational flows and assisting with various tasks in the support department. During this time, I'm not only acquiring solid technical knowledge but also improving my soft skills, allowing me to gain valuable professional experience in a dynamic and highly respected company.",
+      "es": "Actualmente, estoy completando un periodo de prueba de dos meses en Cari AI, donde me estoy capacitando en la creación de bots y agentes conversacionales. Mis responsabilidades incluyen el manejo de flujos de conversación y el apoyo en diversas tareas del área de soporte. Durante este tiempo, no solo estoy adquiriendo conocimientos técnicos sólidos, sino que también estoy mejorando mis habilidades blandas, lo que me permite ganar una valiosa experiencia laboral en un entorno dinámico y de gran prestigio."
+    },
+    "technologies": ["HTML", "CSS", "JavaScript", "jQuery", "PHP", "WordPress"]
+  },
+  {
+    "id": "support-cariai",
+    "company": "Cari AI",
+    "position": {
+      "en": "Support Assistant",
+      "es": "Auxiliar de Soporte"
+    },
+    "duration": {
+      "start": {
+        "en": "August 2025",
+        "es": "Agosto 2025"
+      },
+      "end": {
+        "en": "Currently",
+        "es": "Actualmente"
+      }
+    },
+    "description": {
+      "en": "I'm currently completing a two-month trial period at Cari AI, where I am training to create conversational bots and agents. My responsibilities include managing conversational flows and assisting with various tasks in the support department. During this time, I'm not only acquiring solid technical knowledge but also improving my soft skills, allowing me to gain valuable professional experience in a dynamic and highly respected company.",
+      "es": "Actualmente, estoy completando un periodo de prueba de dos meses en Cari AI, donde me estoy capacitando en la creación de bots y agentes conversacionales. Mis responsabilidades incluyen el manejo de flujos de conversación y el apoyo en diversas tareas del área de soporte. Durante este tiempo, no solo estoy adquiriendo conocimientos técnicos sólidos, sino que también estoy mejorando mis habilidades blandas, lo que me permite ganar una valiosa experiencia laboral en un entorno dinámico y de gran prestigio."
+    },
+    "technologies": ["HTML", "CSS", "JavaScript", "jQuery", "PHP", "WordPress"]
+  }
+]
