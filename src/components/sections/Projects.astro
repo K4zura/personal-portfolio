@@ -5,6 +5,7 @@ import projectsData from "@/data/projects.json";
 import { loadContent } from "@/utils/i18n";
 import type { ProjectData } from "@/utils/types";
 import Image from "astro/components/Image.astro";
+import TechCard from "../ui/TechCard.astro";
 
 interface Props {
   lang?: "en" | "es";
@@ -14,21 +15,21 @@ const { lang = "en" } = Astro.props;
 const content = await loadContent();
 const t = content.projects || {};
 const projects = projectsData as ProjectData[];
-const featuredProjects = projects.filter((project) => project.featured);
-const otherProjects = projects.filter((project) => !project.featured);
+// const featuredProjects = projects.filter((project) => project.featured);
+// const otherProjects = projects.filter((project) => !project.featured);
 ---
 
 <section
   id="projects"
-  class="flex flex-col items-center p-8 min-h-lvh w-full bg-surface gap-8"
+  class="flex flex-col items-center p-8 min-h-lvh w-full bg-surface transition-colors gap-8"
 >
   <SectionTitle>
     {t.title?.[lang]}
   </SectionTitle>
 
-  <div class="w-full max-w-[1280px] grid grid-cols-2 grid-flow-row gap-8">
+  <div class="w-full max-w-[1280px] grid md:grid-cols-2 grid-flow-row gap-8">
     {
-      featuredProjects.map((project) => (
+      projects.map((project) => (
         <article class="w-full flex flex-col rounded-lg overflow-hidden bg-secondary">
           <picture class="w-full aspect-video overflow-hidden">
             <Image
@@ -50,16 +51,25 @@ const otherProjects = projects.filter((project) => !project.featured);
             <h2 class="font-semibold text-sm mt-auto -mb-2">
               {t.technologies?.[lang]}
             </h2>
-            <ul class="flex gap-3">
+            <ul class="flex flex-wrap gap-3">
               {project.technologies.map((technology) => (
-                <li class="px-3 py-1.5 rounded-full border-x-2 border-primary text-xs">
-                  {technology}
-                </li>
+                <TechCard title={technology} />
               ))}
             </ul>
             <div class="flex gap-4">
-              <Button class="flex-1">{t.viewDemo?.[lang]}</Button>
-              <Button variant="outline" class="flex-1">
+              <Button
+                type="a"
+                href={project.links.demo}
+                class="flex-1 font-semibold"
+              >
+                {t.viewDemo?.[lang]}
+              </Button>
+              <Button
+                type="a"
+                href={project.links.github}
+                variant="outline"
+                class="flex-1 font-semibold"
+              >
                 {t.viewCode?.[lang]}
               </Button>
             </div>

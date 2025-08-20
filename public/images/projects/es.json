@@ -1,0 +1,49 @@
+{
+  "PAGE_TITLE": "Portafolio JohannBB",
+  "NAV": {
+    "HOME": "Inicio",
+    "TECHNOLOGIES": "Tecnologias",
+    "ABOUT": "Sobre Mí",
+    "PROJECTS": "Proyectos",
+    "CONTACT": "Contacto"
+  },
+  "HERO": {
+    "TITLE": "Johann Bonilla Bolivar",
+    "SUBTITLE": "Desarrollador de Software",
+    "P": "Desarrollador de Software en formación, con experiencia práctica en tecnologías como Astro, Svelte, TailwindCSS y más. Apasionado por el aprendizaje continuo, busco oportunidades para crecer dentro de un equipo de desarrollo profesional. Llevo aproximadamente 3 años en la programación, enfocado principalmente en el frontend pero tambien con conocimiento en backend y desarroll móvil."
+  },
+  "ABOUT": {
+    "TITLE": "Sobre Mí",
+    "P1": "Soy un desarrollador de software con 3 años de experiencia, especializado en el ecosistema frontend. Mi enfoque principal es la construcción de aplicaciones web robustas y centradas en el usuario, utilizando frameworks modernos como Astro y Svelte, junto con herramientas de estilización como Tailwind CSS.",
+    "P2": "Disfruto convirtiendo diseños complejos en interfaces funcionales y de alto rendimiento. Aunque mi fuerte es el frontend, mantengo un interés activo en el desarrollo backend, móvil y Me apasiona profundamente el impacto de la Inteligencia Artificial en todo el ciclo de vida del software: desde agilizar el desarrollo con herramientas de asistencia, hasta integrar modelos de lenguaje (LLMs) para construir productos finales más inteligentes y dinámicos para el usuario.",
+    "P3": "Actualmente, busco unirme a un equipo profesional donde pueda aportar mis habilidades, colaborar en proyectos desafiantes y continuar mi crecimiento en un entorno innovador."
+  },
+  "PROJECTS": {
+    "TITLE": "Mis Proyectos",
+    "LIST": [
+      {
+        "TITLE": "Nombre del Proyecto 1",
+        "IMG": "https://a-static.besthdwallpaper.com/solo-leveling-sung-jin-woo-shadow-monarch-wallpaper-3840x2160-88320_54.jpg",
+        "DESCRIPTION": "Un centro de control personal diseñado para unificar tu vida digital. Centraliza tu gestión financiera, optimiza tu productividad diaria y sigue de cerca tus metas de desarrollo personal, todo desde una sola interfaz intuitiva.",
+        "TAGS": ["Astro", "Svelte", "Tailwind CSS"],
+        "URL_GITHUB": "#",
+        "URL_DEMO": "#"
+      },
+      {
+        "TITLE": "Nombre del Proyecto 2",
+        "IMG": "https://images.wallpapersden.com/image/download/solo-leveling-sung-jin-woo_bGdpZ2eUmZqaraWkpJRobWllrWdma2U.jpg",
+        "DESCRIPTION": "Una breve descripción de lo que hace este proyecto, el problema que resuelve y su característica más destacada.",
+        "TAGS": ["Node.js", "Express", "PostgreSQL"],
+        "URL_GITHUB": "#",
+        "URL_DEMO": "#"
+      }
+    ]
+  },
+  "CONTACT": {
+    "TITLE": "Hablemos",
+    "DESCRIPTION": "Estoy buscando activamente nuevas oportunidades y me encantaría saber de ti. Si tienes alguna pregunta o simplemente quieres saludar, no dudes en contactarme.",
+    "EMAIL_BUTTON": "Envíame un correo",
+    "LINKEDIN_BUTTON": "Conecta en LinkedIn"
+  },
+  "OTHERS": "Otros"
+}

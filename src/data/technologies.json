@@ -18,6 +18,18 @@
     "level": 3
   },
   {
+    "name": "HTML",
+    "icon": "html",
+    "category": "frontend",
+    "level": 5
+  },
+  {
+    "name": "Next JS",
+    "icon": "nextjs",
+    "category": "frontend",
+    "level": 3
+  },
+  {
     "name": "TypeScript",
     "icon": "typescript",
     "category": "frontend backend",

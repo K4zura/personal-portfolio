@@ -11,7 +11,10 @@ export default {
           hover: "var(--color-primary-hover)",
         },
         secondary: "var(--color-secondary)",
-        background: "var(--color-background)",
+        background: {
+          DEFAULT: "var(--color-background)",
+          opacity: "var(--color-background-o)",
+        },
         surface: {
           DEFAULT: "var(--color-surface)",
           hover: "var(--color-surface-hover)",

@@ -1,6 +1,8 @@
 ---
 interface Props {
   variant?: "default" | "primary" | "outline";
+  type?: "button" | "a";
+  href?: string;
   class?: string;
   data?: string;
 }
@@ -19,16 +21,33 @@ const buttonVariants = {
   },
 };
 
-const { variant = "default", class: className, data } = Astro.props;
+const {
+  variant = "default",
+  type = "button",
+  href,
+  class: className,
+  data,
+} = Astro.props;
 ---
 
-<button
-  class={`px-4 py-2 text-sm rounded-lg ${buttonVariants.variants?.[variant]} ${className}`}
-  data-category={data ?? data}
->
-  <slot />
-</button>
-
+{
+  type === "button" ? (
+    <button
+      class={`px-4 py-2 text-sm rounded-lg ${buttonVariants.variants?.[variant]} ${className}`}
+      data-category={data ?? data}
+    >
+      <slot />
+    </button>
+  ) : (
+    <a
+      href={href}
+      target="_blank"
+      class={`flex items-center justify-center px-4 py-2 text-sm rounded-lg ${buttonVariants.variants?.[variant]} ${className}`}
+    >
+      <slot />
+    </a>
+  )
+}
 <style>
   .filter-btn.active {
     @apply bg-primary text-white border-primary;

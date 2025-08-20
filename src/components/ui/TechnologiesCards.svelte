@@ -5,11 +5,13 @@
   import Docker from "@/assets/icons/Docker.svelte";
   import Git from "@/assets/icons/Git.svelte";
   import Gitlab from "@/assets/icons/Gitlab.svelte";
+  import Html from "@/assets/icons/Html.svelte";
   import Java from "@/assets/icons/Java.svelte";
   import Javascript from "@/assets/icons/Javascript.svelte";
   import Kotlin from "@/assets/icons/Kotlin.svelte";
   import Mongodb from "@/assets/icons/Mongodb.svelte";
   import Mysql from "@/assets/icons/Mysql.svelte";
+  import Nextjs from "@/assets/icons/Nextjs.svelte";
   import Nodejs from "@/assets/icons/Nodejs.svelte";
   import Php from "@/assets/icons/Php.svelte";
   import Postgresql from "@/assets/icons/Postgresql.svelte";
@@ -65,6 +67,8 @@
     typescript: Typescript,
     vercel: Vercel,
     postgresql: Postgresql,
+    nextjs: Nextjs,
+    html: Html,
   };
 
   type GroupedTechnologies = Record<string, Technology[]>;
@@ -85,18 +89,18 @@
     {#each techs as tech}
       <li>
         <article
-          class="flex flex-col gap-1 items-center justify-center p-2 rounded bg-secondary aspect-square w-40 select-none"
+          class="flex flex-col gap-1 items-center justify-center p-2 rounded bg-secondary aspect-square w-28 md:w-40 select-none transition-colors"
         >
           <svelte:component
             this={techIcons[tech.icon]}
-            className="size-12 aspect-square object-contain"
+            className="size-7 md:size-12 aspect-square object-contain"
           />
 
-          <h1 class="font-medium">{tech.name}</h1>
-          <div class="flex justify-center space-x-1 mt-1">
+          <h1 class="font-medium max-md:text-sm">{tech.name}</h1>
+          <div class="flex justify-center space-x-1 md:mt-1">
             {#each Array(5) as _, i}
               <div
-                class={`skill-dot w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                class={`skill-dot w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-all duration-300 ${
                   Number(i) < Number(tech.level)
                     ? "bg-primary group-hover:bg-primary-light group-hover:scale-110"
                     : "bg-gray-300 dark:bg-gray-600 group-hover:bg-gray-400 dark:group-hover:bg-gray-500"

@@ -1,0 +1,68 @@
+---
+import AstroIcon from "@/assets/icons/Astro.svelte";
+import Bash from "@/assets/icons/Bash.svelte";
+import Css from "@/assets/icons/Css.svelte";
+import Docker from "@/assets/icons/Docker.svelte";
+import Git from "@/assets/icons/Git.svelte";
+import Gitlab from "@/assets/icons/Gitlab.svelte";
+import Html from "@/assets/icons/Html.svelte";
+import Java from "@/assets/icons/Java.svelte";
+import Javascript from "@/assets/icons/Javascript.svelte";
+import Kotlin from "@/assets/icons/Kotlin.svelte";
+import Mongodb from "@/assets/icons/Mongodb.svelte";
+import Mysql from "@/assets/icons/Mysql.svelte";
+import Nextjs from "@/assets/icons/Nextjs.svelte";
+import Nodejs from "@/assets/icons/Nodejs.svelte";
+import Php from "@/assets/icons/Php.svelte";
+import Postgresql from "@/assets/icons/Postgresql.svelte";
+import Python from "@/assets/icons/Python.svelte";
+import React from "@/assets/icons/React.svelte";
+import Supabase from "@/assets/icons/Supabase.svelte";
+import Svelte from "@/assets/icons/Svelte.svelte";
+import Tailwindcss from "@/assets/icons/Tailwindcss.svelte";
+import Typescript from "@/assets/icons/Typescript.svelte";
+import Vercel from "@/assets/icons/Vercel.svelte";
+import Vscode from "@/assets/icons/Vscode.svelte";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+const icons = {
+  astro: AstroIcon,
+  svelte: Svelte,
+  java: Java,
+  vscode: Vscode,
+  javascript: Javascript,
+  nodejs: Nodejs,
+  docker: Docker,
+  css: Css,
+  git: Git,
+  gitlab: Gitlab,
+  kotlin: Kotlin,
+  react: React,
+  tailwind: Tailwindcss,
+  php: Php,
+  bash: Bash,
+  mongodb: Mongodb,
+  mysql: Mysql,
+  python: Python,
+  supabase: Supabase,
+  typescript: Typescript,
+  vercel: Vercel,
+  postgresql: Postgresql,
+  nextjs: Nextjs,
+  html: Html,
+};
+
+const Icon = icons[title.toLowerCase().split(" ")[0] as keyof typeof icons];
+---
+
+<li
+  class="flex gap-1.5 items-center px-3 py-2 rounded-full border-x-2 border-primary text-xs"
+>
+  {Icon && <Icon className="size-4 aspect-square object-contain" />}
+  {title}
+</li>
