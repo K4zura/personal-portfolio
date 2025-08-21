@@ -1,0 +1,23 @@
+{
+  "personal": {
+    "email": "jbbprogramming@gmail.com",
+    "location": {
+      "en": "Popayán, Colombia",
+      "es": "Popayán, Colombia"
+    }
+  },
+  "social": {
+    "github": {
+      "url": "https://github.com/K4zura",
+      "username": "@K4zura"
+    },
+    "linkedin": {
+      "url": "https://linkedin.com/in/johann-bonilla-bolivar",
+      "username": "@johann bonilla bolivar"
+    },
+    "email": {
+      "url": "mailto:jbbprogramming@gmail.com",
+      "display": "jbbprogramming@gmail.com"
+    }
+  }
+}

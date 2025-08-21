@@ -1,6 +1,10 @@
 ---
 import SectionTitle from "@/components/ui/SectionTitle.astro";
 import { loadContent } from "@/utils/i18n";
+import contactData from "@/data/contact.json";
+import { Mail } from "@lucide/astro";
+import Github from "@/assets/icons/Github.svelte";
+import Linkedin from "@/assets/icons/Linkedin.svelte";
 
 interface Props {
   lang?: "en" | "es";
@@ -8,18 +12,183 @@ interface Props {
 
 const { lang = "en" } = Astro.props;
 const content = await loadContent();
-const experience = content.contact || {};
+const t = content.contact || {};
 ---
 
 <section
   id="contact"
-  class="flex flex-col items-center p-8 min-h-dvh w-full bg-surface transition-colors"
+  class="flex flex-col items-center p-8 min-h-dvh gap-16 w-full bg-surface transition-colors"
 >
   <SectionTitle>
-    {experience.title?.[lang]}
+    {t.title?.[lang]}
   </SectionTitle>
-</section>
 
+  <div class="grid md:grid-cols-2 gap-12 max-w-[1080px]">
+    <div class="flex flex-col gap-4">
+      <h3 class="text-2xl font-semibold">{t.getin?.[lang]}</h3>
+      <p class="text-text-secondary">{t.description?.[lang]}</p>
+      <h4 class="text-xl font-semibold mt-5">{t.email.label?.[lang]}</h4>
+      <a
+        href={contactData.social.email.url}
+        target="_blank"
+        aria-label="send a email for contact"
+        class="group flex items-center text-primary gap-2.5 text-lg hover:scale-105 transition-transform duration-300"
+      >
+        <Mail class="size-5 group-hover:rotate-12 transition-transform" />
+        {contactData.social.email.display}
+      </a>
+      <h4 class="text-xl font-semibold mt-5">{t.social.title?.[lang]}</h4>
+      <div class="flex flex-col gap-3">
+        <a
+          href={contactData.social.github.url}
+          target="_blank"
+          aria-label="send a email for contact"
+          class="group flex items-center text-text-secondary gap-3 text-lg hover:scale-105 transition-transform duration-300"
+        >
+          <Github
+            className="size-6 group-hover:rotate-12 group-hover:fill-primary transition-all duration-300 fill-text-secondary"
+          />
+          <div>
+            <h5
+              class="font-medium group-hover:text-primary transition-colors duration-300"
+            >
+              Github
+            </h5>
+            <p class="text-sm">{contactData.social.github.username}</p>
+          </div>
+        </a>
+        <a
+          href={contactData.social.linkedin.url}
+          target="_blank"
+          aria-label="send a email for contact"
+          class="group flex items-center text-text-secondary gap-3 text-lg hover:scale-105 transition-transform"
+        >
+          <Linkedin
+            className="size-6 group-hover:rotate-12 group-hover:fill-primary transition-all duration-300 fill-text-secondary"
+          />
+          <div>
+            <h5
+              class="font-medium group-hover:text-primary transition-colors duration-300"
+            >
+              Linkedin
+            </h5>
+            <p class="text-sm">{contactData.social.linkedin.username}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <form
+      action="https://formspree.io/f/mjkonkyo"
+      method="POST"
+      action=""
+      class="p-6 rounded-lg flex flex-col gap-2 bg-secondary"
+      id="contactForm"
+      novalidate
+    >
+      <h3 class="text-2xl font-semibold">{t.send?.[lang]}</h3>
+
+      <label class="text-sm font-medium mt-2 text-text-secondary" for="name">
+        {t.form.name.label?.[lang]}
+      </label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        required
+        minlength="2"
+        maxlength="80"
+        autocomplete="name"
+        class="bg-surface px-3 py-2 rounded text-text-secondary"
+      />
+
+      <label class="text-sm font-medium mt-2 text-text-secondary" for="email">
+        {t.form.email.label?.[lang]}
+      </label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+        maxlength="120"
+        autocomplete="email"
+        inputmode="email"
+        class="bg-surface px-3 py-2 rounded text-text-secondary"
+      />
+
+      <label class="text-sm font-medium mt-2 text-text-secondary" for="message">
+        {t.form.message.label?.[lang]}
+      </label>
+      <textarea
+        id="message"
+        name="message"
+        required
+        minlength="10"
+        maxlength="2000"
+        rows="5"
+        class="bg-surface px-3 py-2 rounded text-text-secondary resize-none"
+      ></textarea>
+
+      <!-- Asunto del email que te llega -->
+      <input type="hidden" name="subject" value="Contacto web — {{ name }}" />
+      <!-- Honeypot estándar de Formspree -->
+      <input
+        type="text"
+        name="_gotcha"
+        tabindex="-1"
+        autocomplete="off"
+        class="absolute opacity-0 -z-10 pointer-events-none"
+        aria-hidden="true"
+      />
+
+      <button
+        type="submit"
+        class="bg-primary text-white font-semibold p-2 rounded-md mt-4 cursor-pointer hover:scale-105 transition-transform duration-300"
+      >
+        {t.form.submit?.[lang]}
+      </button>
+    </form>
+  </div>
+</section>
 <script>
-  document.addEventListener("DOMContentLoaded", () => {});
+  const form = document.getElementById("contactForm");
+  const btn = form.querySelector('button[type="submit"]');
+  let lastSubmit = 0;
+
+  form.addEventListener("submit", async (e) => {
+    // Rate-limit mínimo en cliente (anti-click-spam)
+    const now = Date.now();
+    if (now - lastSubmit < 5000) return e.preventDefault();
+    lastSubmit = now;
+
+    // Si el honeypot trae algo, bloquea
+    if (form.querySelector('input[name="_gotcha"]').value) {
+      e.preventDefault();
+      return;
+    }
+
+    // Si quieres UX sin recarga:
+    e.preventDefault();
+    if (btn) btn.disabled = true;
+
+    try {
+      const fd = new FormData(form);
+      const res = await fetch(form.action, {
+        method: "POST",
+        body: fd,
+        headers: { Accept: "application/json" },
+      });
+
+      if (res.ok) {
+        form.reset();
+        alert("¡Mensaje enviado! Gracias por escribir.");
+      } else {
+        alert("No se pudo enviar. Intenta más tarde.");
+      }
+    } catch {
+      alert("Error de red. Intenta nuevamente.");
+    } finally {
+      if (btn) btn.disabled = false;
+    }
+  });
 </script>

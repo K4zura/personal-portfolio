@@ -166,6 +166,18 @@
       "en": "Feel free to reach out for opportunities or just to say hello",
       "es": "No dudes en contactarme para oportunidades o simplemente para saludar"
     },
+    "getin": {
+      "en": "Get in touch",
+      "es": "Contactar"
+    },
+    "description": {
+      "en": "I'm always open to new opportunities and collaborations. If you have a project in mind or just want to say hello, don't hesitate to reach out!",
+      "es": "Estoy abierto a nuevas oportunidades y colaboraciones. Si tienes un proyecto en mente o simplemente quieres saludar, no dudes en contactarme!"
+    },
+    "send": {
+      "en": "Send a Message",
+      "es": "Enviar un Mensaje"
+    },
     "email": {
       "label": {
         "en": "Email",
@@ -177,6 +189,10 @@
       }
     },
     "social": {
+      "title": {
+        "en": "Connect With Me",
+        "es": "Conéctate conmigo"
+      },
       "github": {
         "en": "View GitHub Profile",
         "es": "Ver Perfil de GitHub"
