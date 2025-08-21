@@ -96,7 +96,7 @@
             className="size-7 md:size-12 aspect-square object-contain"
           />
 
-          <h1 class="font-medium max-md:text-sm">{tech.name}</h1>
+          <h1 class="text-base font-medium max-md:text-sm">{tech.name}</h1>
           <div class="flex justify-center space-x-1 md:mt-1">
             {#each Array(5) as _, i}
               <div
