@@ -155,14 +155,14 @@ const t = content.contact || {};
   const btn = form.querySelector('button[type="submit"]');
   let lastSubmit = 0;
 
-  form.addEventListener("submit", async (e) => {
+  form?.addEventListener("submit", async (e) => {
     // Rate-limit mínimo en cliente (anti-click-spam)
     const now = Date.now();
     if (now - lastSubmit < 5000) return e.preventDefault();
     lastSubmit = now;
 
     // Si el honeypot trae algo, bloquea
-    if (form.querySelector('input[name="_gotcha"]').value) {
+    if (form.querySelector('input[name="_gotcha"]')?.value) {
       e.preventDefault();
       return;
     }
