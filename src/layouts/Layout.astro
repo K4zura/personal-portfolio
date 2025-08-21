@@ -24,7 +24,30 @@ const {
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
+    <!-- Open Graph (para compartir en redes) -->
+    <meta
+      property="og:title"
+      content="Johann Bonilla Bolívar - Software Developer"
+    />
+    <meta
+      property="og:description"
+      content="Explora mis proyectos, experiencia y contacto."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tu-dominio.com" />
+    <meta property="og:image" content="/images/profile_photo.avif" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Johann Bonilla Bolívar - Software Developer"
+    />
+    <meta
+      name="twitter:description"
+      content="Explora mis proyectos, experiencia y contacto."
+    />
+    <meta name="twitter:image" content="/images/profile_photo.avif" />
     <title>{title}</title>
     <script is:inline>
       const theme = (() => {

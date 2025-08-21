@@ -21,7 +21,7 @@ const projects = projectsData as ProjectData[];
 
 <section
   id="projects"
-  class="flex flex-col items-center p-8 min-h-lvh w-full bg-surface transition-colors gap-8"
+  class="flex flex-col items-center p-8 min-h-lvh w-full bg-surface transition-colors duration-300 gap-8"
 >
   <SectionTitle>
     {t.title?.[lang]}
@@ -30,7 +30,7 @@ const projects = projectsData as ProjectData[];
   <div class="w-full max-w-[1280px] grid md:grid-cols-2 grid-flow-row gap-8">
     {
       projects.map((project) => (
-        <article class="w-full flex flex-col rounded-lg overflow-hidden bg-secondary">
+        <article class="w-full flex flex-col rounded-lg overflow-hidden bg-secondary transition-colors duration-300">
           <picture class="w-full aspect-video overflow-hidden">
             <Image
               src={project.image}
@@ -42,10 +42,8 @@ const projects = projectsData as ProjectData[];
             />
           </picture>
           <div class="p-5 flex flex-col gap-4 flex-1">
-            <h1 class="text-2xl text-text-primary font-bold">
-              {project.title?.[lang]}
-            </h1>
-            <p class="text-text-secondary text-base">
+            <h1 class="text-2xl font-bold">{project.title?.[lang]}</h1>
+            <p class="text-text-secondary text-base transition-colors duration-300">
               {project.description?.[lang]}
             </p>
             <h2 class="font-semibold text-sm mt-auto -mb-2">

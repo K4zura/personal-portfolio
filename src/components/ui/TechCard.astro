@@ -61,7 +61,7 @@ const Icon = icons[title.toLowerCase().split(" ")[0] as keyof typeof icons];
 ---
 
 <li
-  class="flex gap-1.5 items-center px-3 py-2 rounded-full border-x-2 border-primary text-xs"
+  class="flex gap-1.5 items-center px-3 py-2 rounded-full border-x-2 border-primary text-xs transition-all duration-300"
 >
   {Icon && <Icon className="size-4 aspect-square object-contain" />}
   {title}
