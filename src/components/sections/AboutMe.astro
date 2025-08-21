@@ -1,6 +1,19 @@
 ---
 import SectionTitle from "@/components/ui/SectionTitle.astro";
 import { loadContent } from "@/utils/i18n";
+import {
+  AudioLines,
+  BookOpen,
+  CodeXml,
+  FileDown,
+  Github,
+  Linkedin,
+  MapPin,
+  MonitorPlay,
+} from "@lucide/astro";
+import { Image } from "astro:assets";
+import aboutData from "@/data/about.json";
+import Button from "../ui/Button.astro";
 
 interface Props {
   lang?: "en" | "es";
@@ -8,13 +21,118 @@ interface Props {
 
 const { lang = "en" } = Astro.props;
 const content = await loadContent();
-const experience = content.about || {};
+const t = content.about || {};
+
+const { personal, interests, stats } = aboutData;
 ---
 
-<section id="about" class="flex flex-col items-center p-8 min-h-lvh w-full">
+<section
+  id="about"
+  class="flex flex-col items-center gap-4 p-8 min-h-lvh w-full"
+>
   <SectionTitle>
-    {experience.title?.[lang]}
+    {t.title?.[lang]}
   </SectionTitle>
+
+  <div
+    class="grid lg:grid-cols-2 items-center max-lg:justify-items-center gap-16 mt-10 max-w-[1080px] w-full"
+  >
+    <picture
+      class="relative aspect-square w-80 h-80 md:w-96 md:h-96 rounded-2xl overflow-hidden shadow-2xl shadow-primary-opacity ring-4 ring-border"
+    >
+      <Image
+        class="w-full h-full object-cover object-center"
+        alt="Profile Johann for about"
+        src={personal.photo}
+        inferSize
+        width={100}
+        height={100}
+      />
+    </picture>
+
+    <div class="flex flex-col gap-2 max-w-2xl">
+      <h3 class="text-3xl font-bold">{personal.name}</h3>
+      <h4
+        class="flex items-center gap-2 text-xl font-medium text-text-secondary"
+      >
+        <MapPin class="size-5" />
+        <span>{personal.location}</span>
+      </h4>
+      <p class="text-lg text-text-secondary mt-3">
+        {personal.bio?.[lang]}
+      </p>
+      <div class="flex gap-5 mt-3">
+        <Button
+          download
+          type="a"
+          href="/resume.pdf"
+          class="font-semibold gap-2"
+        >
+          <FileDown class="size-5" />
+          {t.downloadResume?.[lang]}
+        </Button>
+        <Button
+          type="a"
+          variant="outline_primary"
+          href="https://github.com/K4zura"
+          class="font-semibold"
+          rounded="rounded-full p-2"
+        >
+          <Github class="size-5" />
+        </Button>
+        <Button
+          type="a"
+          variant="outline_primary"
+          href="https://co.linkedin.com/in/johann-bonilla-bolivar"
+          class="font-semibold"
+          rounded="rounded-full p-2"
+        >
+          <Linkedin class="size-5" />
+        </Button>
+      </div>
+    </div>
+  </div>
+
+  <ul
+    class="grid xs:grid-cols-2 md:grid-cols-4 gap-5 mt-10 w-full max-w-[1080px]"
+  >
+    {
+      stats.map((stat) => (
+        <li class="flex flex-col items-center p-5 rounded-lg bg-surface-hover transition-colors duration-300">
+          <span class="text-3xl font-bold text-primary">{stat.value}</span>
+          <p class="text-base font-semibold text-center">
+            {stat.label?.[lang]}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h3 class="text-center text-3xl font-semibold text-text-primary mt-4">
+    {t.interests.title?.[lang]}
+  </h3>
+  <ul class="grid xs:grid-cols-2 md:grid-cols-4 gap-5 w-full max-w-[1080px]">
+    {
+      interests.map((interest) => (
+        <li class="flex flex-col items-center gap-1 p-5 rounded-lg bg-surface-hover transition-colors duration-300">
+          {interest.icon === "code" && <CodeXml class="size-6 text-primary" />}
+          {interest.icon === "film" && (
+            <MonitorPlay class="size-6 text-primary" />
+          )}
+          {interest.icon === "music" && (
+            <AudioLines class="size-6 text-primary" />
+          )}
+          {interest.icon === "book" && <BookOpen class="size-6 text-primary" />}
+          <h4 class="text-lg font-semibold text-left w-full mt-2">
+            {interest.name?.[lang]}
+          </h4>
+          <p class="text-pretty text-sm text-text-secondary">
+            {interest.description?.[lang]}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
 </section>
 
 <script>

@@ -1,18 +1,23 @@
 ---
 interface Props {
-  variant?: "default" | "primary" | "outline";
+  variant?: "default" | "primary" | "outline" | "outline_primary";
   type?: "button" | "a";
   href?: string;
   class?: string;
   data?: string;
+  rounded?: string;
+  download?: boolean;
 }
 
 const buttonVariants = {
   variants: {
-    default: "bg-primary text-white hover:bg-primary-hover",
+    default:
+      "bg-primary text-white hover:bg-primary-hover transition-colors duration-300",
     primary: "bg-primary text-white",
     outline:
-      "border-2 border-border text-text-secondary hover:bg-border hover:text-primary",
+      "border-2 border-border text-text-secondary hover:bg-border hover:text-primary transition-colors duration-300",
+    outline_primary:
+      "border-2 border-primary text-primary hover:bg-primary hover:text-background transition-colors duration-300",
     // size: {
     //   default: "h-[44px] px-6",
     //   md: "h-[48px] px-6",
@@ -27,22 +32,34 @@ const {
   href,
   class: className,
   data,
+  rounded = "px-4 py-2 rounded-lg",
+  download = false,
 } = Astro.props;
 ---
 
 {
   type === "button" ? (
     <button
-      class={`px-4 py-2 text-sm rounded-lg ${buttonVariants.variants?.[variant]} ${className}`}
+      class={`text-sm ${rounded} ${buttonVariants.variants?.[variant]} ${className}`}
       data-category={data ?? data}
     >
       <slot />
     </button>
+  ) : download ? (
+    <a
+      href={href}
+      aria-label={`link to download ${href}`}
+      download
+      class={`flex items-center justify-center text-sm ${rounded} ${buttonVariants.variants?.[variant]} ${className}`}
+    >
+      <slot />
+    </a>
   ) : (
     <a
       href={href}
+      aria-label={`link to ${href}`}
       target="_blank"
-      class={`flex items-center justify-center px-4 py-2 text-sm rounded-lg ${buttonVariants.variants?.[variant]} ${className}`}
+      class={`flex items-center justify-center text-sm ${rounded} ${buttonVariants.variants?.[variant]} ${className}`}
     >
       <slot />
     </a>

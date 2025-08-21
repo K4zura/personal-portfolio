@@ -9,6 +9,7 @@ export default {
         primary: {
           DEFAULT: "var(--color-primary)",
           hover: "var(--color-primary-hover)",
+          opacity: "var(--color-primary-20)",
         },
         secondary: "var(--color-secondary)",
         background: {

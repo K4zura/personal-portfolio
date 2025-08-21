@@ -1,0 +1,88 @@
+{
+  "personal": {
+    "name": "Johann Bonilla Bolivar",
+    "photo": "/images/profile_photo_2.jpg",
+    "bio": {
+      "en": "I'm a passionate full-stack developer with over 5 years of experience creating modern web applications. I love turning complex problems into simple, beautiful, and intuitive solutions. When I'm not coding, you can find me exploring new technologies, contributing to open source projects, or enjoying the great outdoors.",
+      "es": "Soy un desarrollador full-stack apasionado con más de 5 años de experiencia creando aplicaciones web modernas. Me encanta convertir problemas complejos en soluciones simples, hermosas e intuitivas. Cuando no estoy programando, puedes encontrarme explorando nuevas tecnologías, contribuyendo a proyectos de código abierto, o disfrutando de la naturaleza."
+    },
+    "resume": "/resume.pdf",
+    "location": "Popayán, Colombia"
+  },
+  "interests": [
+    {
+      "name": {
+        "en": "Programming",
+        "es": "Programación"
+      },
+      "description": {
+        "en": "Creating solutions and exploring the world of code",
+        "es": "Crear soluciones y explorar el mundo del código"
+      },
+      "icon": "code"
+    },
+    {
+      "name": {
+        "en": "Anime",
+        "es": "Anime"
+      },
+      "description": {
+        "en": "Enjoying stories and art through Japanese animation",
+        "es": "Disfrutar historias y arte a través de la animación japonesa"
+      },
+      "icon": "film"
+    },
+    {
+      "name": {
+        "en": "Music",
+        "es": "Música"
+      },
+      "description": {
+        "en": "Listening, creating, and connecting through melodies and rhythms",
+        "es": "Escuchar, crear y conectar a través de melodías y ritmos"
+      },
+      "icon": "music"
+    },
+    {
+      "name": {
+        "en": "Learning",
+        "es": "Aprendizaje"
+      },
+      "description": {
+        "en": "Always curious about new technologies and continuous improvement",
+        "es": "Siempre curioso sobre nuevas tecnologías y mejora continua"
+      },
+      "icon": "book"
+    }
+  ],
+  "stats": [
+    {
+      "label": {
+        "en": "Years of Experience",
+        "es": "Años de Experiencia"
+      },
+      "value": "3+"
+    },
+    {
+      "label": {
+        "en": "Projects Completed",
+        "es": "Proyectos Completados"
+      },
+      "value": "12+"
+    },
+    {
+      "label": {
+        "en": "Technologies Mastered",
+        "es": "Tecnologías Dominadas"
+      },
+      "value": "7+"
+    },
+    {
+      "label": {
+        "en": "Open Source Contributions",
+        "es": "Contribuciones Open Source"
+      },
+      "value": "20+"
+    }
+  ]
+}
