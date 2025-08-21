@@ -8,6 +8,9 @@ import svelte from "@astrojs/svelte";
 // https://astro.build/config
 export default defineConfig({
   output: "static",
+  redirects: {
+    "/": "/en",
+  },
   i18n: {
     defaultLocale: "en",
     locales: ["en", "es"],
