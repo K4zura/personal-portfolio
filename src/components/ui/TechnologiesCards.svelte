@@ -98,7 +98,7 @@
 
           <h1 class="text-base font-medium max-md:text-sm">{tech.name}</h1>
           <div class="flex justify-center space-x-1 md:mt-1">
-            {#each Array(5) as _, i}
+            {#each Array(10) as _, i}
               <div
                 class={`skill-dot w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-all duration-300 ${
                   Number(i) < Number(tech.level)
@@ -109,7 +109,7 @@
               ></div>
             {/each}
           </div>
-          <p class="text-xs text-primary font-semibold">{tech.level} / 5</p>
+          <p class="text-xs text-primary font-semibold">{tech.level} / 10</p>
         </article>
       </li>
     {/each}
